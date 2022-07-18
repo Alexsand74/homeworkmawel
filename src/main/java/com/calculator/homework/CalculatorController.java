@@ -6,32 +6,56 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CalculatorController {
-    private final CalculatorServicInterface helloServic;
-    public CalculatorController (CalculatorServicInterface helloServic){
-        this.helloServic = helloServic;
+    private final CalculatorServicInterface calculator;
+    public CalculatorController (CalculatorServicInterface calculator){
+        this.calculator = calculator;
     }
     @GetMapping
     public String hello (){
-        return helloServic.hello();
+        return calculator.hello();
     }
     @GetMapping(path = "/calculator")
     public String helloCalculator (){
-        return helloServic.helloCalculator();
+        return calculator.helloCalculator();
     }
     @GetMapping(path = "/calculator/plus")
-    public String plusCalculator (@RequestParam (required = true) String num1,@RequestParam (required = true) String num2){
-        return helloServic.plusCalculator(num1,num2);
+    public String plusCalculator (@RequestParam (name = "num1",required = false) Integer num1,
+                                  @RequestParam (name ="num2",required = false) Integer num2){
+        if (num1 == null || num2 == null) {
+            return " Не введен какой то из параметров !!!!";
+         } else {
+            return " Результат сложения чисел " + num1 + " + " + num2 + " = "
+                    + calculator.plusCalculator(num1,num2);
+        }
     }
     @GetMapping(path = "/calculator/minus")
-    public String minusCalculator (@RequestParam (required = true) String num1,@RequestParam (required = true) String num2){
-        return helloServic.minusCalculator(num1,num2);
+    public String minusCalculator (@RequestParam (name = "num1",required = false) Integer num1,
+                                   @RequestParam (name ="num2",required = false) Integer num2){
+        if (num1 == null || num2 == null) {
+            return " Не введен какой то из параметров !!!!";
+          } else {
+            return " Результат вычитания чисел " + num1 + " - " + num2 + " = "
+                    + calculator.minusCalculator(num1,num2);
+        }
     }
     @GetMapping(path = "/calculator/multiply")
-    public String multiplyCalculator (@RequestParam (required = true) String num1,@RequestParam (required = true) String num2){
-        return helloServic. multiplyCalculator(num1,num2);
+    public String multiplyCalculator (@RequestParam (name = "num1",required = false) Integer num1,
+                                      @RequestParam (name ="num2",required = false) Integer num2){
+        if (num1 == null || num2 == null) {
+            return " Не введен какой то из параметров !!!!";
+          } else {
+            return  " Результат умножения чисел " + num1 + " * " + num2 + " = "
+                    + calculator.multiplyCalculator(num1,num2);
+        }
     }
     @GetMapping(path = "/calculator/divide")
-    public String divideCalculator (@RequestParam (required = true) String num1,@RequestParam (required = true) String num2){
-        return helloServic.divideCalculator(num1,num2);
-    }
+    public String divideCalculator (@RequestParam (name = "num1",required = false) Integer num1,
+                                    @RequestParam (name ="num2",required = false) Integer num2){
+        if (num1 == null || num2 == null) {
+            return " Не введен какой то из параметров !!!!"; }
+        if (num2 != 0) {
+            return " Результат деления чисел " + num1 + " / " + num2 + " = "
+                                               + calculator.divideCalculator(num1, num2);
+            } else { return " Делить на 0 нельзя !"; }
+     }
 }

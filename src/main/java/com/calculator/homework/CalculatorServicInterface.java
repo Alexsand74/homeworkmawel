@@ -4,8 +4,8 @@ public interface CalculatorServicInterface {
 
     String hello();
     String helloCalculator();
-    String plusCalculator (String num1, String num2);
-    String minusCalculator (String num1, String num2);
-    String multiplyCalculator (String num1, String num2);
-    String divideCalculator (String num1, String num2);
+    Integer plusCalculator (Integer num1, Integer num2);
+    Integer minusCalculator (Integer num1, Integer num2);
+    Integer multiplyCalculator (Integer num1, Integer num2);
+    Double divideCalculator (Integer num1, Integer num2);
 }
