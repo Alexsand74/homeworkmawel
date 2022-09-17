@@ -21,21 +21,24 @@ public class CalculatorController {
     @GetMapping(path = "/calculator/plus")
     public String plusCalculator (@RequestParam (name = "num1",required = false) Integer num1,
                                   @RequestParam (name ="num2",required = false) Integer num2){
+
         if (num1 == null || num2 == null) {
             return " Не введен какой то из параметров !!!!";
-         } else {
-            return " Результат сложения чисел " + num1 + " + " + num2 + " = "
-                    + calculator.plusCalculator(num1,num2);
+          } else {
+           return " Результат сложения чисел " + num1 + " + " + num2 + " = "
+                                            + calculator.plusCalculator(num1,num2);
+
         }
     }
     @GetMapping(path = "/calculator/minus")
     public String minusCalculator (@RequestParam (name = "num1",required = false) Integer num1,
                                    @RequestParam (name ="num2",required = false) Integer num2){
+
         if (num1 == null || num2 == null) {
             return " Не введен какой то из параметров !!!!";
           } else {
             return " Результат вычитания чисел " + num1 + " - " + num2 + " = "
-                    + calculator.minusCalculator(num1,num2);
+                                            + calculator.minusCalculator(num1,num2);
         }
     }
     @GetMapping(path = "/calculator/multiply")
@@ -45,7 +48,7 @@ public class CalculatorController {
             return " Не введен какой то из параметров !!!!";
           } else {
             return  " Результат умножения чисел " + num1 + " * " + num2 + " = "
-                    + calculator.multiplyCalculator(num1,num2);
+                                           + calculator.multiplyCalculator(num1,num2);
         }
     }
     @GetMapping(path = "/calculator/divide")
@@ -58,4 +61,14 @@ public class CalculatorController {
                                                + calculator.divideCalculator(num1, num2);
             } else { return " Делить на 0 нельзя !"; }
      }
+    private boolean isInteger(String value1, String value2 ) {
+        if ( value1 == "" || value2 == ""){
+            return true;
+        }
+        if ((int)Integer.parseInt(value1) != Integer.parseInt(value1)
+                                || (int)Integer.parseInt(value2) != Integer.parseInt(value2)) {
+            return true;
+        }
+        return false;
+    }
 }
